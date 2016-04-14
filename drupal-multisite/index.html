@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Multi-site – DRUPAL</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/kaliop.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<style type="text/css">
+
+			ul.inline {
+				margin: 0;
+				padding: 0;
+				list-style-type: none;
+				text-align: center;
+			}
+
+			ul.inline li {
+				display: inline;
+			}
+
+			div.horiz-columns {
+				display: flex;
+				align-items: flex-start;
+				justify-content: space-around;
+				flex-wrap: nowrap;
+			}
+			div.horiz-columns.two-col > div,
+			div.horiz-columns.two-col > ul {
+				width: 50%;
+			}
+
+			ul.horiz-list {
+				display: flex;
+				align-items: flex-start;
+				justify-content: space-around;
+				flex-wrap: nowrap;
+				list-style-type: none;
+			}
+			ul.horiz-list > li > h3 {
+				text-align: center;
+			}
+
+			.horiz-columns.centered {
+				align-items: center;
+			}
+
+			.reveal ul > ul {
+				margin-top: 2em;
+			}
+
+			img.screencap {
+				border-radius: 10px;
+				width: 100%;
+				height: 100%;
+			}
+
+			img.architecture-diagram {
+				border-radius: 10px;
+				width: 100%;
+				height: 100%;
+			}
+
+			.reveal .highlight {
+				color: #9fc855;
+			}
+
+			.reveal h2 + h3 {
+				color: #9fc855;
+			}
+
+			table.decision-chart {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			table.decision-chart,
+			table.decision-chart td,
+			table.decision-chart th {
+				border: 1px solid #9fc855;
+				padding-left: 1em;
+				text-align: left;
+			}
+
+			table.decision-chart th {
+				color: #9fc855;
+			}
+
+			table.decision-chart td {
+				font-size: 0.6em;
+			}
+
+			img.casestudy {
+				/*width: 50%;*/
+				/*max-height: 400px;*/
+				max-width: 400px;
+			}
+
+
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Multi-sites <br>et<br> usines à sites</h1>
+					<p>
+						<small>Présenté par Romain Dalverny</small>
+					</p>
+				</section>
+				<section>
+					<section>
+						<h2>Les problématiques</h2>
+						<ul>
+							<li>Le temps</li>
+							<aside class="notes">
+								Mise en production d'un site dans un délai court
+							</aside>
+							<li>Le coût</li>
+							<aside class="notes">
+								Réduction du coût de fabrication
+							</aside>
+							<li>La maintenance</li>
+							<aside class="notes">
+								Réduction du coût de maintenance et facilité pour une gestion globale
+							</aside>
+							<li>L’homogénéité</li>
+							<aside class="notes">
+								Respect d'un catalogue de fonctionnalités et de mises en pages communes pour permettre une présence web massive et cohérente
+							</aside>
+						</ul>
+					</section>
+					<section>
+						<h2>Choisir son architecture</h2>
+						<h3>Différents facteurs</h3>
+						<ul>
+							<li>Pilotage des sites doit etre unique ou non</li>
+							<li>Appararence des sites (pour visiteur) comme des sites à part ou comme faisant partie d'un site unique</li>
+							<li>Thème et mise en page des contenus doivent suivre une ligne éditorial précise ou non</li>
+							<li>Les sites doivent disposer du même processus de publication</li>
+							<li>Le contenu devra être partagé ou pas entre les différentes sites</li>
+							<li>etc...</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Différentes architectures possible</h2>
+						<ul>
+							<li>Installations distinctes</li>
+							<li>Multi-site</li>
+							<li>Domain access</li>
+							<li>Organic group</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Installations distinctes</h2>
+						<h3>Donnez à chacun son propre Drupal</h3>
+						<ul>
+							<li class="incremental">Chaque site dispose de son propre code</li>
+							<li class="incremental">Chaque site dispose de sa propre base de données</li>
+						</ul>
+						<p>Installations distinctes + outils de deployment (Drush, Aegir)</p>
+						<aside class="notes">
+							Aegir est une distribution permettant d'automatiser la plupart des tâches courantes
+							relatives au déploiement, à la maintenance ou à la sauvegarde de vos sites Drupal.
+							C'est une "super distribution" dans le sens où elle permet d'administrer toutes les distributions
+							installées sur votre serveur. Vous souhaitez déployer un site DrupalCommerce, OpenAtrium, OpenEntreprise,
+							Drupal7, Drupal6 ? Votre déploiement s'effectue en moins de 5 minutes si vous maitrisez vos domaines :)
+							Plus encore, la distribution vous permet de gérer plus efficacement vos architectures multi-sites, ou
+							l'administration d'un site à fort trafic dans le cas d'un hébergement multi-serveurs.
+							http://www.bluedrop.fr/ressources-aegir-une-super-distribution-drupal
+						</aside>
+						<aside class="notes">
+							Drush est un outil en ligne de commande permettant d'administrer simplement Drupal. Disponible
+							sur toutes les plateformes (unix/osx/windows), il est un indispensable du développement de vos sites.
+						</aside>
+					</section>
+					<section>
+						<h2>Installations distinctes</h2>
+						<div class="horiz-columns two-col">
+							<div>
+								<h3 class="fragment">Avantages</h3>
+								<ul>
+									<li class="fragment">Plate-forme standard</li>
+									<li class="fragment">Pas de complexité supplémentaire</li>
+									<li class="fragment">Chaque site est entièrement autonome</li>
+									<li class="fragment">Pas besoin d'être sous la même version de Drupal</li>
+									<li class="fragment">Outils d'automatisation</li>
+									<aside class="notes">
+										(Drush ou Aegir) permettent d'administrer et créer de nouveaux sites plus facilement
+									</aside>
+								</ul>
+							</div>
+							<div>
+								<h3 class="fragment">Inconvénients</h3>
+								<ul>
+									<li class="fragment">Aucune économie d'échelle</li>
+									<li class="fragment">Aucune cohérence</li>
+									<li class="fragment">De nombreux sites à gérer</li>
+									<li class="fragment">Connexion individuel à chaque site</li>
+									<li class="fragment">Aucun partage de contenu</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section>
+						<h2>Module Features</h2>
+						<ul>
+							<li class="fragment">Exporter les configurations de Drupal en code</li>
+							<aside class="notes">
+								Faciliter le déploiement de projet
+								Faciliter le versionning
+							</aside>
+							<li class="fragment">Creer des packages de fonctionnalité</li>
+							<aside class="notes">
+								Des fonctionnalités réutilisables
+							</aside>
+							<li class="fragment">Facilement distributable dans un profil d'installation</li>
+						</ul>
+						<aside class="notes">
+							D8 : CMI
+						</aside>
+					</section>
+					<section>
+						<h2>Profiles d'installation</h2>
+						<p class="fragment">
+							Permet de personnaliser Drupal à l’installation : étapes
+							d’installation, modules activés, configuration. Utile pour
+							automatiser et éviter les tâches répétitives.
+						</p>
+						<h4 class="fragment">
+							Drush make
+						</h4>
+						<aside class="notes">
+							La commande make de Drush permet de préparer rapidement une installation de Drupal avec ses modules contribués,
+							ses librairies pré-téléchargées et plus encore. Incontournable quand on travaille sur un grand nombre de projets
+							où l'on utilise à 80% les mêmes modules.
+						</aside>
+						<aside class="notes">
+							<ol>
+								<li>Vous récupérez automatiquement la dernière version stable du module, Tout en gardant la possibilité de préciser
+									la version d'un module en particulier en rajoutant la ligne
+								</li>
+								<li>Il est plus facile de maintenir un fichier make qu'un ensemble de dossiers de modules, de plus vous pouvez
+								facilement mettre en place des fichiers make pour chaque typologie de projets : site_corporate.make,
+								site_multilingue.make, site_vitrine.make ...</li>
+								<li>L'utilisation de drush make permet d'automatiser facilement le déploiment de Drupal dans des scripts bash
+								(unix) ou batch (windows). J'y reviendrai.</li>
+							</ol>
+							<p>Le principal point noir de Drush make est sa relative lenteur pour récupérer les fichiers des serveurs Drupal, là où un profil d'installation possède déjà tous les fichiers à installer.</p>
+						</aside>
+					</section>
+					<section>
+						<h2>Profiles d'installation</h2>
+						+
+						<h2>Features</h2>
+						<h2>=</h2>
+						<h2 class="fragment highlight"><em>Distributions</em></h2>
+						<aside class="notes">
+							Une "distribution" a son propre nom de marque comme OpenPublish (lien est externe ), Commerce Kickstart
+							(le lien est externe) ou Recruteur (le lien est externe) . Une distribution est un profil d'installation
+							dans le but de distribuer un profil d'installation spécifique pour la communauté avec un but précis .
+						</aside>
+						<p class="fragment">
+							Cas d’utilisation spécifique
+						</p>
+						<p class="fragment">
+							Chaque nouveau projet se base sur le même set de modules, de configurations, de themes… qui ont été validés et
+							représentent le socle de chaque nouveau site.
+						</p>
+						<p class="fragment">
+							Ouvre la porte à des outils tels qu’Ægir
+							<aside class="notes">
+							(gestion de plates-formes et d’instances Drupal avec Drush et le profil
+							Hostmaster : automatisez la gestion de sites) et Jenkins
+							(intégration continue).
+							</aside>
+						</p>
+						<aside class="notes">
+							Différence profil d'installation <=> distribution
+						</aside>
+					</section>
+					<section>
+						<h2>D8</h2>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Multi-site</h2>
+						<h3>Plusieurs sites depuis une seule installation</h3>
+						<ul>
+							<li>Les sites partagent le même code</li>
+							<li>Chaque site dispose de sa propre base de données</li>
+						</ul>
+						<p>Multi-site + Installations distinctes + outils de deployment</p>
+					</section>
+					<section>
+						<h2>Multi-site</h2>
+<pre><code data-trim="" class="avrasm">
+/
+&nbsp;&nbsp;sites/
+&nbsp;&nbsp;&nbsp;&nbsp;default/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.php
+&nbsp;&nbsp;&nbsp;&nbsp;www.drupal.edu/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.php
+&nbsp;&nbsp;&nbsp;&nbsp;biology.drupal.edu/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.php</code></pre>
+					</section>
+					<section>
+						<p>sites/sites.php</p>
+						<pre><code class="php" data-trim>
+$sites['www.drupal.edu'] = 'main';
+$sites['fapi.api.drupal.edu'] = 'fapi';
+$sites['multisite.building.drupal.edu'] = 'multisite';
+$sites['fundraising.drupalassociation.com'] = 'da_fundraising';
+						</code></pre>
+						<pre class="fragment"><code class="plain" data-trim>
+/
+  sites/
+    sites.php
+    default/
+      settings.php
+    www.drupal.edu/
+      settings.php
+    fapi/
+      settings.php
+    da_fundraising/
+      settings.php
+		</code></pre>
+					</section>
+					<section>
+						<h2>Multi-site</h2>
+						<div class="horiz-columns two-col">
+							<div>
+								<h3 class="fragment">Avantages</h3>
+								<ul>
+									<li class="fragment"><em>Installations distinctes, plus...</em></li>
+									<li class="fragment">Une base de code pour mettre à jour</li>
+									<li class="fragment">économie significative en matière d'utilisation de la mémoire vive des serveurs</li>
+								</ul>
+							</div>
+							<div>
+								<h3 class="fragment">Inconvénients</h3>
+								<ul>
+									<li class="fragment"><em>Installations distinctes, plus...</em></li>
+									<li class="fragment">Une seule version du core</li>
+									<li class="fragment">Avoir plusieurs version d'un meme module est compliqué. Vous ne pouvez pas facilement mettre à jour un module pour un seul site</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section>
+						<p style="text-align: left;">Si vous avez une équipe d'administration d'un serveur...</p>
+						<p class="fragment" style="text-align: right;">... utilisez Multi-site</p>
+						<p class="fragment" style="text-align: left;">si vous avez plusieurs serveurs avec sa propre équipe...</p>
+						<p class="fragment" style="text-align: right;">... utilisez Installations distinctes</p>
+					</section>
+					<section>
+						<h2>D8</h2>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Domain Access</h2>
+						<h3>Plusieurs sites depuis une seule installation</h3>
+						<ul>
+							<li>Les sites partagent le même code</li>
+							<li>Les site partagent la même base de données</li>
+						</ul>
+						<p>Domain Access + modules d’extension</p>
+					</section>
+					<section>
+						<h2>Domain Access</h2>
+						<img src="assets/domainaccess.png" alt="Domain Access architecture" class="architecture-diagram" />
+					</section>
+					<section>
+						<h2><a href="http://drupal.org/project/domain">Domain Access</a></h2>
+						<ul>
+							<li class="fragment">un module de contrôle d'accès</li>
+							<li class="fragment">système de droits d'accès au noeud</li>
+							<li class="fragment">Drupal filtre nœuds pour n'afficher que contenus affectés à ces domaines spécifiques</li>
+							<li class="fragment">Suite de modules</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Domain Access: Basics</h2>
+						<img src="assets/domainaccess/domain-list.png" class="screencap" />
+					</section>
+					<section class="slide">
+						<h2>Domain Access: Basics</h2>
+						<img src="assets/domainaccess/domain-edit.png" class="screencap" />
+					</section>
+					<section class="slide">
+						<h2>Domain Access: Settings overrides</h2>
+						<img src="assets/domainaccess/domain-settings.png" class="screencap" />
+					</section>
+					<section class="slide">
+						<h2>Domain Access: Themes</h2>
+						<img src="assets/domainaccess/domain-theme.png" class="screencap" />
+					</section>
+					<section class="slide">
+						<h2>Domain Access: Themes</h2>
+						<img src="assets/domainaccess/domain-theme-color.png" class="screencap" />
+					</section>
+					<section class="slide">
+						<h2>Domain Access: Timezones</h2>
+						<img src="assets/domainaccess/domain-timezone.png" class="screencap" />
+					</section>
+					<section class="slide">
+						<h2>Domain Access: Node editing</h2>
+						<img src="assets/domainaccess/domain-node-edit.png" class="screencap" />
+					</section>
+					<section class="slide">
+						<h2>Domain Access: Node editing</h2>
+						<img src="assets/domainaccess/domain-node-view.png" class="screencap" />
+					</section>
+					<section class="slide">
+						<h2>Domain Access: Node editing</h2>
+						<img src="assets/domainaccess/domain-content-list.png" class="screencap" />
+					</section>
+					<section>
+						<h2>Domain Access</h2>
+						<div class="horiz-columns two-col">
+							<div>
+								<h3 class="fragment">Avantages</h3>
+								<ul>
+									<li class="fragment">Un site pour gérer, une seule base de code, une seule base de données, une seule base d'utilisateurs</li>
+									<li class="fragment">Partage de contenu</li>
+									<li class="fragment">Theme par domaine</li>
+									<li class="fragment">Configuration possible par domaine</li>
+									<li class="fragment">Architecture cohérente</li>
+								</ul>
+							</div>
+							<div>
+								<h3 class="fragment">Inconvénients</h3>
+								<ul>
+									<li class="fragment">Architecture cohérente</li>
+									<li class="fragment">Doit utiliser plusieurs domaines</li>
+									<li class="fragment">Utilise l'accès de noeud</li>
+									<li class="fragment">Point de défaillance unique</li>
+									<li class="fragment">Tout devient un peu plus compliqué ...</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section>
+						<h2>D8</h2>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Organic Groups</h2>
+						http://drupalfr.org/forum/support/support-general/6608-resolu-quoi-sert-le-module-organic-group-og
+						<h3>Plusieurs sites depuis une seule installation</h3>
+						<ul>
+							<li>Les sites partagent le même code</li>
+							<li>Les site partagent la même base de données</li>
+						</ul>
+						<p>Organic Groups + modules d’extension</p>
+					</section>
+					<section>
+						<h2>Organic Groups</h2>
+						<img class="vcenter" src="assets/organicgroups.png"  />
+					</section>
+					<section>
+						<h2><a href="http://drupal.org/project/og">Organic Groups</a></h2>
+						<ul>
+							<li class="fragment">Toute entité == "groupe"</li>
+							<li class="fragment">Toute entité appartient à un "groupe"</li>
+							<li class="fragment">Les utilisateurs rejoignent des groupes</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Organic Groups</h2>
+						<h3>Contrôle d'accès</h3>
+						<ul>
+							<li class="fragment">Des rôles par groupe</li>
+							<li class="fragment">Des utilisateurs par groupe</li>
+							<li class="fragment">Des autorisations noeud/champ modification/suppression par groupe </li>
+						</ul>
+					</section>
+					<section>
+						<h2>Organic Groups</h2>
+						<h3>Integration</h3>
+						<ul>
+							<li class="fragment">Un certain nombre de vues (module Views) pré-paramétrées</li>
+							<li class="fragment">Ctools/Panels Context plugins: Simple à mettre en place</li>
+							<li class="fragment">Très bonne intégration de Chaos tool suite </li>
+						</ul>
+					</section>
+					<section>
+						<h2>Organic Groups</h2>
+						<h3>Group nodes</h3>
+						<img src="assets/og-node-config.png" alt="Organic Group Node configuration" class="screencap" />
+					</section>
+					<section>
+						<h2>Organic Groups</h2>
+						<h3>Permissions</h3>
+						<img src="assets/og-permission.png" alt="Organic Group permissions" class="screencap" />
+					</section>
+					<section>
+						<h2>Organic Groups</h2>
+						<div class="horiz-columns two-col">
+							<div>
+								<h3 class="fragment">Avantages</h3>
+								<ul>
+									<li class="fragment">Un site à gérer</li>
+									<li class="fragment">Contenu partagé</li>
+									<li class="fragment">Thèmes par groupe</li>
+									<li class="fragment">Scales to thousands</li>
+									<li class="fragment">Seulement un domaine</li>
+									<li class="fragment">Architecture cohérente</li>
+								</ul>
+							</div>
+							<div>
+								<h3 class="fragment">Inconvénients</h3>
+								<ul>
+									<li class="fragment">Architecture cohérente</li>
+									<li class="fragment">Seulement un domain</li>
+									<li class="fragment">Toujours paramètres du site à l'échelle</li>
+									<li class="fragment">Point de défaillance unique</li>
+									<li class="fragment">Tout est un peu plus compliqué</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section>
+						<h2>D8</h2>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Mix and Match</h2>
+						<img src="assets/multisite-domainaccess.png" alt="Mixed Multi-site with Domain Access" class="architecture-diagram" />
+					</section>
+					<section>
+						<p>Multi-site peut héberger plusieurs combinaisons de site</p>
+						<ul>
+							<li class="fragment">Multi-site / OG</li>
+							<li class="fragment">Multi-site / Domain Access</li>
+							<li class="fragment">Multi-site / Workbench Access</li>
+							<li class="fragment">Multi-site / Domain Access / OG</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h2>Decisions decisions...</h2>
+					<table class="decision-chart">
+						<thead>
+						<tr><th>Si vous souhaitez...</th> <th>Cela signifie surement...</th></tr>
+						</thead>
+						<tbody>
+						<tr class="fragment"><td>Version de core multiple</td> <td class="fragment">Separate installs</td></tr>
+						<tr class="fragment"><td>Différents type de contenu</td> <td class="fragment">Separate installs, multi-site</td></tr>
+						<tr class="fragment"><td>Unique base utilisateur</td> <td class="fragment">Domain Access, OG, Single-site</td></tr>
+						<tr class="fragment"><td>Sous-domaines</td> <td class="fragment">Separate installs, multi-site, Domain Access</td></tr>
+						<tr class="fragment"><td>Un domaine</td> <td class="fragment">OG, Single-site</td></tr>
+						<tr class="fragment"><td>Administration serveur simplifié</td> <td class="fragment">Domain Access, OG, Single-site</td></tr>
+						<tr class="fragment"><td>Contenu partagé</td> <td class="fragment">Domain Access, OG, Single-site</td></tr>
+						<tr class="fragment"><td>ACL Par department</td> <td class="fragment">Single-site, OG</td></tr>
+						<tr class="fragment"><td>Autonomie par Department</td> <td class="fragment">Separate installs, multi-site (less so OG)</td></tr>
+						<tr class="fragment"><td>Vue par département</td> <td class="fragment">Separate installs, multi-site (less so OG)</td></tr>
+						<tr class="fragment"><td>Migration étalé dans le temps</td> <td class="fragment">Separate installs, multi-site, Domain Access, proxy server?</td></tr>
+						<tr class="fragment"><td>Theme par département</td> <td class="fragment">Separate installs, Multi-site, Domain Access, OG</td></tr>
+						<tr class="fragment"><td>admins du site inexpérimentées</td> <td class="fragment">Separate installs, Single-site</td></tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<table class="decision-chart">
+						<thead>
+						<tr><th>If you want...</th> <th>Probably means...</th><th>100%</th><th>50%</th><th>0%</th></tr>
+						</thead>
+						<tbody>
+						<tr class="fragment"><td>Partage du code</td><td></td><td>non</td><td>oui</td><td>oui</td></tr>
+						<tr class="fragment"><td>Partage de la bdd</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
+						<tr class="fragment"><td>Facilité de création d’un nouveau site</td><td></td><td>non</td><td>non</td><td>oui/non</td></tr>
+						<tr class="fragment"><td>Facilité de maintenance</td><td></td><td>non</td><td>oui/non</td><td>oui</td></tr>
+						<tr class="fragment"><td>SSO “par défaut”</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
+						<tr class="fragment"><td>Partage des utilisateurs “par défaut”</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
+						<tr class="fragment"><td>Partage des contenus “par défaut”</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
+						<tr class="fragment"><td>Partage des configurations “par défaut”</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
+						<tr class="fragment"><td>BO/administration partagée</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
+						<tr class="fragment"><td>Indépendance de code et déploiement</td><td></td><td>oui</td><td>non</td><td>non</td></tr>
+						<tr class="fragment"><td>Indépendance d’hébergement</td><td></td><td>oui</td><td>non</td><td>non</td></tr>
+						<tr class="fragment"><td>Pas de “single point of failure”</td><td></td><td>oui</td><td>non</td><td>non</td></tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h2>Conclusion</h2>
+
+					<p>
+						Drupal offre une variété de solutions pour traiter plusieurs sites avec un contenu partagé et séparé.
+						Comme avec toutes les choses Drupal il n'y a pas de solution à droite - seulement des options pour vos besoins spécifiques.
+						Évaluer vos objectifs et prendre des décisions fondées sur eux; vous pouvez constater que l'accès de domaine est un meilleur
+						ajustement pour vos éditeurs de contenu ou d'une configuration multi-site est beaucoup plus facile à gérer pour vos
+						administrateurs système.
+					</p>
+				</section>
+				<section>
+					<h2>Restant...</h2>
+					<p>	Partage utilisateur :</p>
+					<ul>
+						<li class="fragment">https://www.drupal.org/node/22267</li>
+						<li class="fragment">https://www.drupal.org/project/ldap</li>
+						<li class="fragment">https://www.vincentliefooghe.net/content/int%C3%A9gration-drupal-avec-un-annuaire-ldap</li>
+					</ul>
+					<p>	Drupal8 multisite :</p>
+					<ul>
+						<li class="fragment">https://www.drupal.org/node/2297419</li>
+					</ul>
+					<p>	Drupal8 domain access / organic group :</p>
+					<ul>
+						<li class="fragment">domain : https://www.drupal.org/node/2575439</li>
+						<li class="fragment">organic : https://www.drupal.org/node/2591017</li>
+					</ul>
+					</p>
+
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
