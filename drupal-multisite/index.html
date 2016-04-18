@@ -184,7 +184,6 @@
 						<!-- littletext lft -->
 						<ul>
 							<li class="fragment">Pilotage des sites doit etre unique ou non</li>
-							<li class="fragment">Appararence des sites (pour visiteur) comme des sites à part ou comme faisant partie d'un site unique</li>
 							<li class="fragment">Thème et mise en page des contenus doivent suivre une ligne éditorial précise ou non</li>
 							<li class="fragment">Les sites doivent disposer du même processus de publication</li>
 							<li class="fragment">Le contenu devra être partagé ou pas entre les différentes sites</li>
@@ -250,7 +249,7 @@
 									<li class="fragment">Aucune économie d'échelle</li>
 									<li class="fragment">Aucune cohérence</li>
 									<li class="fragment">De nombreux sites à gérer</li>
-									<li class="fragment">Connexion individuel à chaque site</li>
+									<li class="fragment">Connexion individuel à chaque site (voir solution SSO https://groups.drupal.org/node/182004)</li>
 									<li class="fragment">Aucun partage de contenu</li>
 								</ul>
 							</div>
@@ -286,7 +285,7 @@
 							<li class="fragment">Themes</li>
 							<li class="fragment">Configuration prédéfinit</li>
 						</ul>
-
+						<br>
 						<h4 class="fragment">
 							Drush make
 						</h4>
@@ -334,16 +333,11 @@
 							OpenPublish (a distribution for online publishers)
 							Pressflow (a distribution with performance and scalability improvements)
 						</aside>
-						<p class="fragment">
-							Ouvre la porte à des outils tels qu’Ægir
-							<aside class="notes">
-							(gestion de plates-formes et d’instances Drupal avec Drush et le profil
-							Hostmaster : automatisez la gestion de sites) et Jenkins
-							(intégration continue).
-							</aside>
-						</p>
 						<aside class="notes">
-							Différence profil d'installation <=> distribution
+						Ouvre la porte à des outils tels qu’Ægir
+						(gestion de plates-formes et d’instances Drupal avec Drush et le profil
+						Hostmaster : automatisez la gestion de sites) et Jenkins
+						(intégration continue).
 						</aside>
 					</section>
 					<section>
@@ -359,7 +353,7 @@
 				<section>
 					<section>
 						<h2>Multi-site</h2>
-						<h3>Plusieurs sites depuis une seule installation</h3>
+						<h3 class="fragment">Plusieurs sites depuis une seule installation</h3>
 						<aside class="notes">
 							Depuis des années, Drupal a la possibilité de propulser plusieurs sites depuis une seule installation de base.
 							Dans ce cas, il n'existe qu'une seule copie du noyau de Drupal, mais chaque site dispose de son propre fichier de configuration,
@@ -369,19 +363,7 @@
 							<li class="fragment">Les sites partagent le même code</li>
 							<li class="fragment">Chaque site dispose de sa propre base de données</li>
 						</ul>
-						<p class="fragment">Multi-site + Installations distinctes + outils de deployment</p>
-					</section>
-					<section>
-						<h2>Multi-site</h2>
-<pre><code data-trim="" class="avrasm">
-/
-&nbsp;&nbsp;sites/
-&nbsp;&nbsp;&nbsp;&nbsp;default/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.php
-&nbsp;&nbsp;&nbsp;&nbsp;www.drupal.edu/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.php
-&nbsp;&nbsp;&nbsp;&nbsp;biology.drupal.edu/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.php</code></pre>
+						<p class="fragment">Multi-site + outils de deployment</p>
 					</section>
 					<section>
 						<p>sites/sites.php</p>
@@ -421,7 +403,7 @@ $sites['fundraising.drupalassociation.com'] = 'da_fundraising';
 								<ul>
 									<li class="fragment"><em>Installations distinctes, plus...</em></li>
 									<li class="fragment">Une seule version du core</li>
-									<li class="fragment">Avoir plusieurs version d'un meme module est compliqué. Vous ne pouvez pas facilement mettre à jour un module pour un seul site</li>
+									<li class="fragment">Avoir plusieurs version d'un meme module est compliqué.</li>
 								</ul>
 							</div>
 						</div>
@@ -434,30 +416,22 @@ $sites['fundraising.drupalassociation.com'] = 'da_fundraising';
 					</section>
 					<section>
 						<h2>Drupal 8</h2>
+						<p class="notes">https://www.drupal.org/node/2297419</p>
 					</section>
 				</section>
 				<section>
 					<section>
 						<h2>Domain Access</h2>
-						<h3>Plusieurs sites depuis une seule installation</h3>
+						<h3 class="fragment">Plusieurs sites depuis une seule installation</h3>
 						<ul>
-							<li>Les sites partagent le même code</li>
-							<li>Les site partagent la même base de données</li>
+							<li class="fragment">Les sites partagent le même code</li>
+							<li class="fragment">Les site partagent la même base de données</li>
 						</ul>
-						<p>Domain Access + modules d’extension</p>
+						<p class="fragment">Domain Access + modules d’extension</p>
 					</section>
 					<section>
 						<h2>Domain Access</h2>
 						<img src="assets/domainaccess.png" alt="Domain Access architecture" class="architecture-diagram" />
-					</section>
-					<section>
-						<h2><a href="http://drupal.org/project/domain">Domain Access</a></h2>
-						<ul>
-							<li class="fragment">un module de contrôle d'accès</li>
-							<li class="fragment">système de droits d'accès au noeud</li>
-							<li class="fragment">Drupal filtre nœuds pour n'afficher que contenus affectés à ces domaines spécifiques</li>
-							<li class="fragment">Suite de modules</li>
-						</ul>
 					</section>
 					<section>
 						<h2>Domain Access: Basics</h2>
@@ -505,35 +479,38 @@ $sites['fundraising.drupalassociation.com'] = 'da_fundraising';
 									<li class="fragment">Partage de contenu</li>
 									<li class="fragment">Theme par domaine</li>
 									<li class="fragment">Configuration possible par domaine</li>
-									<li class="fragment">Architecture cohérente</li>
 								</ul>
 							</div>
 							<div>
 								<h3 class="fragment">Inconvénients</h3>
 								<ul>
-									<li class="fragment">Architecture cohérente</li>
 									<li class="fragment">Doit utiliser plusieurs domaines</li>
-									<li class="fragment">Utilise l'accès de noeud</li>
 									<li class="fragment">Point de défaillance unique</li>
-									<li class="fragment">Tout devient un peu plus compliqué ...</li>
+									<li class="fragment">Tout devient un peu plus compliqué (menu, droits)...</li>
 								</ul>
 							</div>
 						</div>
 					</section>
 					<section>
 						<h2>Drupal 8</h2>
+						<aside class="notes">
+							https://github.com/agentrickard/domain
+							https://www.drupal.org/project/domain
+						</aside>
 					</section>
 				</section>
 				<section>
 					<section>
 						<h2>Organic Groups</h2>
-						http://drupalfr.org/forum/support/support-general/6608-resolu-quoi-sert-le-module-organic-group-og
-						<h3>Plusieurs sites depuis une seule installation</h3>
+						<aside class="notes">
+							http://drupalfr.org/forum/support/support-general/6608-resolu-quoi-sert-le-module-organic-group-og
+						</aside>
+						<h3 class="fragment">Plusieurs sites depuis une seule installation</h3>
 						<ul>
-							<li>Les sites partagent le même code</li>
-							<li>Les site partagent la même base de données</li>
+							<li class="fragment">Les sites partagent le même code</li>
+							<li class="fragment">Les site partagent la même base de données</li>
 						</ul>
-						<p>Organic Groups + modules d’extension</p>
+						<p class="fragment">Organic Groups + modules d’extension</p>
 					</section>
 					<section>
 						<h2>Organic Groups</h2>
@@ -543,26 +520,8 @@ $sites['fundraising.drupalassociation.com'] = 'da_fundraising';
 						<h2><a href="http://drupal.org/project/og">Organic Groups</a></h2>
 						<ul>
 							<li class="fragment">Toute entité == "groupe"</li>
-							<li class="fragment">Toute entité appartient à un "groupe"</li>
-							<li class="fragment">Les utilisateurs rejoignent des groupes</li>
-						</ul>
-					</section>
-					<section>
-						<h2>Organic Groups</h2>
-						<h3>Contrôle d'accès</h3>
-						<ul>
-							<li class="fragment">Des rôles par groupe</li>
-							<li class="fragment">Des utilisateurs par groupe</li>
-							<li class="fragment">Des autorisations noeud/champ modification/suppression par groupe </li>
-						</ul>
-					</section>
-					<section>
-						<h2>Organic Groups</h2>
-						<h3>Integration</h3>
-						<ul>
-							<li class="fragment">Un certain nombre de vues (module Views) pré-paramétrées</li>
-							<li class="fragment">Ctools/Panels Context plugins: Simple à mettre en place</li>
-							<li class="fragment">Très bonne intégration de Chaos tool suite </li>
+							<li class="fragment">Toute entité peut appartenir à un "groupe"</li>
+							<li class="fragment">Les utilisateurs peuvent rejoindrent des groupes</li>
 						</ul>
 					</section>
 					<section>
@@ -584,7 +543,6 @@ $sites['fundraising.drupalassociation.com'] = 'da_fundraising';
 									<li class="fragment">Un site à gérer</li>
 									<li class="fragment">Contenu partagé</li>
 									<li class="fragment">Thèmes par groupe</li>
-									<li class="fragment">Scales to thousands</li>
 									<li class="fragment">Seulement un domaine</li>
 									<li class="fragment">Architecture cohérente</li>
 								</ul>
@@ -593,8 +551,7 @@ $sites['fundraising.drupalassociation.com'] = 'da_fundraising';
 								<h3 class="fragment">Inconvénients</h3>
 								<ul>
 									<li class="fragment">Architecture cohérente</li>
-									<li class="fragment">Seulement un domain</li>
-									<li class="fragment">Toujours paramètres du site à l'échelle</li>
+									<li class="fragment">Seulement un domaine</li>
 									<li class="fragment">Point de défaillance unique</li>
 									<li class="fragment">Tout est un peu plus compliqué</li>
 								</ul>
@@ -621,7 +578,6 @@ $sites['fundraising.drupalassociation.com'] = 'da_fundraising';
 					</section>
 				</section>
 				<section>
-					<h2>Decisions decisions...</h2>
 					<table class="decision-chart">
 						<thead>
 						<tr><th>Si vous souhaitez...</th> <th>Cela signifie surement...</th></tr>
@@ -629,38 +585,19 @@ $sites['fundraising.drupalassociation.com'] = 'da_fundraising';
 						<tbody>
 						<tr class="fragment"><td>Version de core multiple</td> <td class="fragment">Separate installs</td></tr>
 						<tr class="fragment"><td>Différents type de contenu</td> <td class="fragment">Separate installs, multi-site</td></tr>
-						<tr class="fragment"><td>Unique base utilisateur</td> <td class="fragment">Domain Access, OG, Single-site</td></tr>
+						<tr class="fragment"><td>Unique base utilisateur</td> <td class="fragment">Domain Access, OG</td></tr>
 						<tr class="fragment"><td>Sous-domaines</td> <td class="fragment">Separate installs, multi-site, Domain Access</td></tr>
-						<tr class="fragment"><td>Un domaine</td> <td class="fragment">OG, Single-site</td></tr>
-						<tr class="fragment"><td>Administration serveur simplifié</td> <td class="fragment">Domain Access, OG, Single-site</td></tr>
-						<tr class="fragment"><td>Contenu partagé</td> <td class="fragment">Domain Access, OG, Single-site</td></tr>
-						<tr class="fragment"><td>ACL Par department</td> <td class="fragment">Single-site, OG</td></tr>
-						<tr class="fragment"><td>Autonomie par Department</td> <td class="fragment">Separate installs, multi-site (less so OG)</td></tr>
-						<tr class="fragment"><td>Vue par département</td> <td class="fragment">Separate installs, multi-site (less so OG)</td></tr>
+						<tr class="fragment"><td>Un domaine</td> <td class="fragment">OG</td></tr>
+						<tr class="fragment"><td>Administration serveur simplifié</td> <td class="fragment">Domain Access, OG</td></tr>
+						<tr class="fragment"><td>Contenu partagé</td> <td class="fragment">Domain Access, OG</td></tr>
+						<tr class="fragment"><td>Partage du code</td><td class="fragment">Domain Access, OG, multi-site</td></tr>
+						<tr class="fragment"><td>Indépendance de code et déploiement</td><td class="fragment">Separate installs</td></tr>
+						<tr class="fragment"><td>Partage de la bdd</td><td class="fragment">Domain Access, OG</td></tr>
+						<tr class="fragment"><td>Indépendance d’hébergement</td> <td class="fragment">Separate installs</td></tr>
 						<tr class="fragment"><td>Migration étalé dans le temps</td> <td class="fragment">Separate installs, multi-site, Domain Access, proxy server?</td></tr>
 						<tr class="fragment"><td>Theme par département</td> <td class="fragment">Separate installs, Multi-site, Domain Access, OG</td></tr>
-						<tr class="fragment"><td>admins du site inexpérimentées</td> <td class="fragment">Separate installs, Single-site</td></tr>
-						</tbody>
-					</table>
-				</section>
-				<section>
-					<table class="decision-chart">
-						<thead>
-						<tr><th>If you want...</th> <th>Probably means...</th><th>100%</th><th>50%</th><th>0%</th></tr>
-						</thead>
-						<tbody>
-						<tr class="fragment"><td>Partage du code</td><td></td><td>non</td><td>oui</td><td>oui</td></tr>
-						<tr class="fragment"><td>Partage de la bdd</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
-						<tr class="fragment"><td>Facilité de création d’un nouveau site</td><td></td><td>non</td><td>non</td><td>oui/non</td></tr>
-						<tr class="fragment"><td>Facilité de maintenance</td><td></td><td>non</td><td>oui/non</td><td>oui</td></tr>
-						<tr class="fragment"><td>SSO “par défaut”</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
-						<tr class="fragment"><td>Partage des utilisateurs “par défaut”</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
-						<tr class="fragment"><td>Partage des contenus “par défaut”</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
-						<tr class="fragment"><td>Partage des configurations “par défaut”</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
-						<tr class="fragment"><td>BO/administration partagée</td><td></td><td>non</td><td>non</td><td>oui</td></tr>
-						<tr class="fragment"><td>Indépendance de code et déploiement</td><td></td><td>oui</td><td>non</td><td>non</td></tr>
-						<tr class="fragment"><td>Indépendance d’hébergement</td><td></td><td>oui</td><td>non</td><td>non</td></tr>
-						<tr class="fragment"><td>Pas de “single point of failure”</td><td></td><td>oui</td><td>non</td><td>non</td></tr>
+						<tr class="fragment"><td>admins du site inexpérimentées</td> <td class="fragment">Separate installs</td></tr>
+						<tr class="fragment"><td>Pas de “single point of failure”</td><td class="fragment">Separate installs</td></tr>
 						</tbody>
 					</table>
 				</section>
