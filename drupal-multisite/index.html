@@ -16,7 +16,7 @@
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/kaliop.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -90,12 +90,17 @@
 			}
 
 			.reveal .highlight {
-				color: #9fc855;
+				color: #4e4e4e;
 			}
 
 			.reveal h2 + h3 {
-				color: #9fc855;
+				color: #4e4e4e;
 			}
+
+			.reveal section h1, .reveal section h2, .reveal section h3, .reveal section h4, .reveal section h5, .reveal section h6 {
+				color: #fb6500;
+			}
+
 
 			table.decision-chart {
 				width: 100%;
@@ -167,14 +172,16 @@
 					</section>
 					<section>
 						<h2>Choisir son architecture</h2>
-						<p class="littletext lft">plusieurs sites semi-indépendants ne signifient pas nécessairement de multiples installations de Drupal<p/>
+						<aside class="notes">Plusieurs sites semi-indépendants ne signifient pas nécessairement de multiples installations de Drupal</aside>
+						<div style="clear:both"></div>
 						<aside class="notes">
 						   Le point clé à considérer lors du déploiement à grande échelle de sites Drupal est que plusieurs sites semi-indépendants ne signifient pas nécessairement de multiples installations de Drupal.
 							 En fait, cela peut même ne pas signifier du tout plusieurs sites mais bien un seul et unique site.
 							 En effet, ce qui peut apparaître comme un site distinct, peut n'être effectivement qu'une implémentation du système de contrôle d'accès de Drupal.
 							 Pour décider de l'architecture à mettre en place, il y a un certain nombre de facteurs à considérer, comme par exemple
 						</aside>
-						<p class="fragment littletext lft">Différents facteurs :</p>
+						<h3 class="fragment ">Différents facteurs</h3>
+						<!-- littletext lft -->
 						<ul>
 							<li class="fragment">Pilotage des sites doit etre unique ou non</li>
 							<li class="fragment">Appararence des sites (pour visiteur) comme des sites à part ou comme faisant partie d'un site unique</li>
@@ -269,11 +276,17 @@
 					</section>
 					<section>
 						<h2>Profiles d'installation</h2>
-						<p class="fragment">
+						<aside class="notes">
 							Permet de personnaliser Drupal à l’installation : étapes
 							d’installation, modules activés, configuration. Utile pour
 							automatiser et éviter les tâches répétitives.
-						</p>
+						</aside>
+						<ul>
+							<li class="fragment">Modules</li>
+							<li class="fragment">Themes</li>
+							<li class="fragment">Configuration prédéfinit</li>
+						</ul>
+
 						<h4 class="fragment">
 							Drush make
 						</h4>
@@ -310,10 +323,17 @@
 						<p class="fragment">
 							Cas d’utilisation spécifique
 						</p>
-						<p class="fragment">
+						<aside class="notes">
 							Chaque nouveau projet se base sur le même set de modules, de configurations, de themes… qui ont été validés et
 							représentent le socle de chaque nouveau site.
-						</p>
+						</aside>
+						<aside class="notes">
+							Commerce Kickstart (an e-commerce distribution for merchants)
+							OpenAtrium (an intranet distribution)
+							Drupal Commons (a distribution for building communities and intranets)
+							OpenPublish (a distribution for online publishers)
+							Pressflow (a distribution with performance and scalability improvements)
+						</aside>
 						<p class="fragment">
 							Ouvre la porte à des outils tels qu’Ægir
 							<aside class="notes">
@@ -327,7 +347,7 @@
 						</aside>
 					</section>
 					<section>
-						<h2>D8</h2>
+						<h2>Drupal 8</h2>
 						<aside class="notes">
 							A noter qu'avec l'arrivée de Drupal 8 et son nouveau système de gestion de la configuration,
 							cette stratégie pourra être encore plus facilement mise en œuvre car désormais l'intégralité des configurations
@@ -413,7 +433,7 @@ $sites['fundraising.drupalassociation.com'] = 'da_fundraising';
 						<p class="fragment" style="text-align: right;">... utilisez Installations distinctes</p>
 					</section>
 					<section>
-						<h2>D8</h2>
+						<h2>Drupal 8</h2>
 					</section>
 				</section>
 				<section>
@@ -501,7 +521,7 @@ $sites['fundraising.drupalassociation.com'] = 'da_fundraising';
 						</div>
 					</section>
 					<section>
-						<h2>D8</h2>
+						<h2>Drupal 8</h2>
 					</section>
 				</section>
 				<section>
@@ -582,7 +602,7 @@ $sites['fundraising.drupalassociation.com'] = 'da_fundraising';
 						</div>
 					</section>
 					<section>
-						<h2>D8</h2>
+						<h2>Drupal 8</h2>
 					</section>
 				</section>
 				<section>
