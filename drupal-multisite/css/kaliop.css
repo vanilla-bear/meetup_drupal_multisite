@@ -159,5 +159,12 @@ q:after {
 p.bigtext {
     font-size: 150%; }
 
+p.littletext {
+        font-size: 50%; }
+
+.lft {
+  float: left;
+}
+
 .reveal ul + p, .reveal div + p {
     margin-top: 1em; }

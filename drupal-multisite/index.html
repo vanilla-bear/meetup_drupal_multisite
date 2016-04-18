@@ -140,21 +140,26 @@
 				</section>
 				<section>
 					<section>
-						<h2>Les problématiques</h2>
+						<h2>Problématique</h2>
+						<aside class="notes">
+							La création d'usine à sites ou le besoin de pouvoir industrialiser la création d'un site Internet est une problématique souvent rencontrée pour développer sa présence Internet.
+							Elle doit souvent répondre à un ou plusieurs de ces objectifs
+						</aside>
+						<h3 class="fragment"> Les objectifs :</h3>
 						<ul>
-							<li>Le temps</li>
+							<li class="fragment">Le temps</li>
 							<aside class="notes">
 								Mise en production d'un site dans un délai court
 							</aside>
-							<li>Le coût</li>
+							<li class="fragment">Le coût</li>
 							<aside class="notes">
 								Réduction du coût de fabrication
 							</aside>
-							<li>La maintenance</li>
+							<li class="fragment">La maintenance (gestion globale)</li>
 							<aside class="notes">
 								Réduction du coût de maintenance et facilité pour une gestion globale
 							</aside>
-							<li>L’homogénéité</li>
+							<li class="fragment">L’homogénéité (fonctionnalités,mise en page commune)</li>
 							<aside class="notes">
 								Respect d'un catalogue de fonctionnalités et de mises en pages communes pour permettre une présence web massive et cohérente
 							</aside>
@@ -162,35 +167,45 @@
 					</section>
 					<section>
 						<h2>Choisir son architecture</h2>
-						<h3>Différents facteurs</h3>
+						<p class="littletext lft">plusieurs sites semi-indépendants ne signifient pas nécessairement de multiples installations de Drupal<p/>
+						<aside class="notes">
+						   Le point clé à considérer lors du déploiement à grande échelle de sites Drupal est que plusieurs sites semi-indépendants ne signifient pas nécessairement de multiples installations de Drupal.
+							 En fait, cela peut même ne pas signifier du tout plusieurs sites mais bien un seul et unique site.
+							 En effet, ce qui peut apparaître comme un site distinct, peut n'être effectivement qu'une implémentation du système de contrôle d'accès de Drupal.
+							 Pour décider de l'architecture à mettre en place, il y a un certain nombre de facteurs à considérer, comme par exemple
+						</aside>
+						<p class="fragment littletext lft">Différents facteurs :</p>
 						<ul>
-							<li>Pilotage des sites doit etre unique ou non</li>
-							<li>Appararence des sites (pour visiteur) comme des sites à part ou comme faisant partie d'un site unique</li>
-							<li>Thème et mise en page des contenus doivent suivre une ligne éditorial précise ou non</li>
-							<li>Les sites doivent disposer du même processus de publication</li>
-							<li>Le contenu devra être partagé ou pas entre les différentes sites</li>
-							<li>etc...</li>
+							<li class="fragment">Pilotage des sites doit etre unique ou non</li>
+							<li class="fragment">Appararence des sites (pour visiteur) comme des sites à part ou comme faisant partie d'un site unique</li>
+							<li class="fragment">Thème et mise en page des contenus doivent suivre une ligne éditorial précise ou non</li>
+							<li class="fragment">Les sites doivent disposer du même processus de publication</li>
+							<li class="fragment">Le contenu devra être partagé ou pas entre les différentes sites</li>
+							<li class="fragment">etc...</li>
 						</ul>
 					</section>
 					<section>
 						<h2>Différentes architectures possible</h2>
 						<ul>
-							<li>Installations distinctes</li>
-							<li>Multi-site</li>
-							<li>Domain access</li>
-							<li>Organic group</li>
+							<li class="fragment">Installations distinctes</li>
+							<li class="fragment">Multi-site</li>
+							<li class="fragment">Domain access</li>
+							<li class="fragment">Organic group</li>
 						</ul>
 					</section>
 				</section>
 				<section>
 					<section>
 						<h2>Installations distinctes</h2>
-						<h3>Donnez à chacun son propre Drupal</h3>
+						<h3 class="fragment">Donnez à chacun son propre Drupal</h3>
+						<aside class="notes">
+							Parfois, la meilleure stratégie est de ne pas unifier les sites du tout. Dans ce cas, toute similitude entre les différents sites est en grande partie une coïncidence.
+						</aside>
 						<ul>
-							<li class="incremental">Chaque site dispose de son propre code</li>
-							<li class="incremental">Chaque site dispose de sa propre base de données</li>
+							<li class="fragment">Chaque site dispose de son propre code</li>
+							<li class="fragment">Chaque site dispose de sa propre base de données</li>
 						</ul>
-						<p>Installations distinctes + outils de deployment (Drush, Aegir)</p>
+						<p  class="fragment">Installations distinctes + outils de deployment (Drush, Aegir)</p>
 						<aside class="notes">
 							Aegir est une distribution permettant d'automatiser la plupart des tâches courantes
 							relatives au déploiement, à la maintenance ou à la sauvegarde de vos sites Drupal.
@@ -313,6 +328,11 @@
 					</section>
 					<section>
 						<h2>D8</h2>
+						<aside class="notes">
+							A noter qu'avec l'arrivée de Drupal 8 et son nouveau système de gestion de la configuration,
+							cette stratégie pourra être encore plus facilement mise en œuvre car désormais l'intégralité des configurations
+							seront accessibles et déployables nativement depuis des fichiers de configuration au format YAML.
+						</aside>
 					</section>
 				</section>
 
@@ -320,11 +340,16 @@
 					<section>
 						<h2>Multi-site</h2>
 						<h3>Plusieurs sites depuis une seule installation</h3>
+						<aside class="notes">
+							Depuis des années, Drupal a la possibilité de propulser plusieurs sites depuis une seule installation de base.
+							Dans ce cas, il n'existe qu'une seule copie du noyau de Drupal, mais chaque site dispose de son propre fichier de configuration,
+							qui pointe vers une autre base de données
+						</aside>
 						<ul>
-							<li>Les sites partagent le même code</li>
-							<li>Chaque site dispose de sa propre base de données</li>
+							<li class="fragment">Les sites partagent le même code</li>
+							<li class="fragment">Chaque site dispose de sa propre base de données</li>
 						</ul>
-						<p>Multi-site + Installations distinctes + outils de deployment</p>
+						<p class="fragment">Multi-site + Installations distinctes + outils de deployment</p>
 					</section>
 					<section>
 						<h2>Multi-site</h2>
